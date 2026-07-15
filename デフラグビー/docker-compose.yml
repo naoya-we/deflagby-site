@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mysql:8.0
+    platform: linux/amd64
+    container_name: defragby_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: local_wp_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_password_secure
+      MYSQL_ROOT_PASSWORD: wp_root_password_secure
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pwp_root_password_secure"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  wordpress:
+    image: wordpress:latest
+    platform: linux/amd64
+    container_name: defragby_wordpress
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: local_wp_db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password_secure
+      WORDPRESS_DEBUG: "1"
+    volumes:
+      - ./html:/var/www/html
+      - ./apache-wordpress.conf:/etc/apache2/conf-available/wordpress.conf
+
+volumes:
+  db_data:
