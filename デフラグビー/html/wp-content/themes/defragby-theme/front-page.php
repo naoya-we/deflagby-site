@@ -187,6 +187,7 @@ $t = $current_lang === 'en';
         $vd_info  = isset($venue_map[$vd_key]) ? $venue_map[$vd_key] : null;
         $date_str = $vd_info ? ($t ? $vd_info['date_en'] : $vd_info['date_ja']) : ( isset($match['date']) ? $match['date'] : '' );
         $venue_str = $vd_info ? ($t ? $vd_info['venue_en'] : $vd_info['venue_ja']) : ($t ? 'Tokyo Venues' : '東京都内競技場');
+        $map_url   = function_exists('defragby_get_venue_map_url') ? defragby_get_venue_map_url($match) : '';
         $time_str  = isset($match['time']) ? $match['time'] : '';
 
         // 区分ラベル
@@ -194,9 +195,7 @@ $t = $current_lang === 'en';
         $round_labels = [ 'group' => ['グループ戦','Group Stage'], 'sf' => ['準決勝','Semi-Final'], 'final' => ['決勝','Final'] ];
         $round_label = isset($round_labels[$round_key]) ? $round_labels[$round_key][$t ? 1 : 0] : ($t ? 'Tournament Match' : 'トーナメントマッチ');
       ?>
-      <a href="<?php echo esc_url( home_url('/information/') ); ?>"
-         class="fp-match-card"
-         role="listitem">
+      <div class="fp-match-card" role="listitem">
         <div class="fp-match-card__header">
           <span class="fp-match-date"><i class="fa-regular fa-calendar"></i> <?php echo esc_html($date_str); ?></span>
           <?php if ($time_str) : ?><span class="fp-match-time"><i class="fa-regular fa-clock"></i> <?php echo esc_html($time_str); ?></span><?php endif; ?>
@@ -221,10 +220,20 @@ $t = $current_lang === 'en';
           </div>
         </div>
         <div class="fp-match-card__venue">
-          <i class="fa-solid fa-location-dot"></i>
-          <?php echo esc_html($venue_str); ?>
+          <?php if ( ! $is_finished && ! empty( $map_url ) ) : ?>
+            <a href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener" class="venue-map-link">
+              <i class="fa-solid fa-location-dot"></i>
+              <?php echo esc_html( $venue_str ); ?>
+              <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75em;"></i>
+            </a>
+          <?php else : ?>
+            <span class="venue-text-disabled">
+              <i class="fa-solid fa-location-dot"></i>
+              <?php echo esc_html( $venue_str ); ?>
+            </span>
+          <?php endif; ?>
         </div>
-      </a>
+      </div>
       <?php endforeach; ?>
     </div><!-- /.fp-matches__scroll -->
 

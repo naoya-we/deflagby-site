@@ -2734,6 +2734,31 @@ a.sponsor-card--co-host:hover {
   margin-top: auto;
 }
 
+.venue-map-link {
+  color: var(--color-navy);
+  font-weight: 700;
+  text-decoration: underline;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.venue-map-link:hover {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.venue-text-disabled {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .fp-matches__cta {
   display: flex;
   justify-content: center;

@@ -158,6 +158,25 @@ function defragby_get_venue_map() {
   );
 }
 
+/**
+ * 試合データから対応する Google Maps URL を取得するヘルパー関数
+ */
+function defragby_get_venue_map_url( $match ) {
+  $venue_map = defragby_get_venue_map();
+  $vd_key    = isset( $match['venue_date'] ) ? $match['venue_date'] : '';
+
+  if ( isset( $venue_map[ $vd_key ]['map_url'] ) && ! empty( $venue_map[ $vd_key ]['map_url'] ) ) {
+    return $venue_map[ $vd_key ]['map_url'];
+  }
+
+  $venue_name = isset( $match['venue_ja'] ) ? $match['venue_ja'] : ( isset( $match['venue'] ) ? $match['venue'] : '' );
+  if ( strpos( $venue_name, '夢の島' ) !== false ) return 'https://maps.app.goo.gl/2CuChSizBoh2A2Es9';
+  if ( strpos( $venue_name, '江戸川' ) !== false ) return 'https://maps.app.goo.gl/JGxVW2owkhThFioA9';
+  if ( strpos( $venue_name, '秩父宮' ) !== false ) return 'https://maps.app.goo.gl/bFpSrqX5wWcwK93H8';
+
+  return '';
+}
+
 /* ==========================================================================
    グループ順位自動計算: 試合結果保存時に defragby_pool_standings を更新
    ========================================================================== */

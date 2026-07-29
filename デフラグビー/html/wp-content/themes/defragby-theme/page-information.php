@@ -259,6 +259,7 @@ $t = ( $current_lang === 'en' );
           $vd_info   = isset($venue_map[$vd_key]) ? $venue_map[$vd_key] : null;
           $date_str  = $vd_info ? ($t ? $vd_info['date_en'] : $vd_info['date_ja']) : ( isset($match['date']) ? $match['date'] : '' );
           $venue_str = $vd_info ? ($t ? $vd_info['venue_en'] : $vd_info['venue_ja']) : ($t ? 'Tokyo Venues' : '東京都内競技場');
+          $map_url   = function_exists('defragby_get_venue_map_url') ? defragby_get_venue_map_url($match) : '';
           $time_str  = isset($match['time']) ? $match['time'] : '';
 
           $score_a_val = (isset($match['score_a']) && $match['score_a'] !== '') ? (int)$match['score_a'] : null;
@@ -341,8 +342,18 @@ $t = ( $current_lang === 'en' );
           <!-- カードフッター行 -->
           <div class="info-match-card__footer">
             <div class="info-match-card__venue">
-              <i class="fa-solid fa-location-dot"></i>
-              <?php echo esc_html($venue_str); ?>
+              <?php if ( ! $is_finished && ! empty( $map_url ) ) : ?>
+                <a href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener" class="venue-map-link">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <?php echo esc_html( $venue_str ); ?>
+                  <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.75em;"></i>
+                </a>
+              <?php else : ?>
+                <span class="venue-text-disabled">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <?php echo esc_html( $venue_str ); ?>
+                </span>
+              <?php endif; ?>
             </div>
           </div>
         </div>
