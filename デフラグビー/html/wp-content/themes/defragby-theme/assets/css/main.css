@@ -3774,7 +3774,7 @@ body:not(.home) .entry-meta {
    会場注意バナー — Venue Notice Banner
    ───────────────────────────────────────────────────────────────────────── */
 .venue-notice-banner {
-  max-width: 1040px;
+  max-width: 100%;
   margin: 32px auto 0;
   position: relative;
   top: -21px;

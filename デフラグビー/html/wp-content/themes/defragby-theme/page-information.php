@@ -22,7 +22,7 @@ $t = ( $current_lang === 'en' );
     ) ); ?></span>
   </div>
 
-  <div class="info-container" style="max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px;">
+  <div class="info-container" style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 80px;">
 
     <!-- ═══════════════════════════════════════════════════
          1. グループステージ / Group Stage Standings

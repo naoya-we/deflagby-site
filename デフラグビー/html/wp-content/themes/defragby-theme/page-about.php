@@ -13,7 +13,7 @@ $current_lang = isset($_GET['lang']) && $_GET['lang'] === 'en' ? 'en' : 'ja';
     <div class="entry-meta">3rd WORLD DEAF RUGBY SEVENS CHAMPIONSHIP</div>
   </header>
 
-  <div class="about-container" style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px;">
+  <div class="about-container" style="width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 80px;">
     
     <!-- 1. 大会概要 -->
     <section class="about-section entry-content">
