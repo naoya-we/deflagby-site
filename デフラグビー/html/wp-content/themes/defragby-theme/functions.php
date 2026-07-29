@@ -333,10 +333,10 @@ function defragby_scripts() {
   wp_enqueue_style( 'defragby-fonts', 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap', array(), null );
 
   // Main stylesheet
-  wp_enqueue_style( 'defragby-style', get_stylesheet_uri(), array(), '8.0.0' );
+  wp_enqueue_style( 'defragby-style', get_stylesheet_uri(), array(), '8.1.0' );
 
   // Theme components & layout styles
-  wp_enqueue_style( 'defragby-main', get_template_directory_uri() . '/assets/css/main.css', array( 'defragby-style' ), '8.0.0' );
+  wp_enqueue_style( 'defragby-main', get_template_directory_uri() . '/assets/css/main.css', array( 'defragby-style' ), '8.1.0' );
 
   // FontAwesome for sports/social icons
   wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1' );
