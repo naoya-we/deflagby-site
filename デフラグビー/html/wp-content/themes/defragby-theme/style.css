@@ -1,0 +1,60 @@
+/*
+Theme Name: defragby-theme
+Theme URI: https://deaf-rugby.or.jp/world3rd/
+Author: Antigravity
+Author URI: https://deaf-rugby.or.jp/
+Description: Custom theme for the 3rd World Deaf Rugby Sevens Championship (Ume Plan).
+Version: 3.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: defragby-theme
+*/
+
+/* ==========================================================================
+   Design System Tokens — aligned with official tournament logo colors v3
+   ========================================================================== */
+
+:root {
+  /* ── Core Brand Palette (PDF Guideline Aligned) ── */
+  --color-primary:       #C32128;   /* 茜色 (Akane-iro) — accent, CV buttons, alerts */
+  --color-primary-dark:  #9E1B20;   /* ホバー用の少し暗めの茜色                     */
+  --color-primary-light: #FDF2F3;   /* 背景等に使う極薄の赤                        */
+  --color-navy:          #1E7F95;   /* 新橋色 (Shinbashi-iro) — main color, headers, H2 */
+  --color-navy-dark:     #213A4E;   /* 藍鉄 (Aitetsu) — sub color, footer background */
+  --color-navy-light:    #E5EFF1;   /* 爽やかな極薄の青緑                           */
+  --color-gold:          #C9A84C;   /* Championship Gold — prestige, warmth       */
+  --color-gold-light:    #F5EDD3;   /* Pale gold tint                             */
+
+  /* ── Neutral Palette ── */
+  --color-bg:            #F2F8F9;   /* 淡浅葱 (Awasagi) — primary page background color */
+  --color-bg-soft:       #E5EFF1;   /* 淡いブルーグレーを背景のソフトカラーに使用  */
+  --color-surface:       #FFFFFF;   /* 純白 — card backgrounds to stand out cleanly */
+  --color-border:        #C9D8DB;   /* 新配色に合わせた微小境界色                   */
+  --color-border-strong: #8BA8AD;   /* 境界線をより引き締めるカラー                 */
+  --color-text:          #213A4E;   /* 藍鉄 (Aitetsu) — standard body text color    */
+  --color-text-muted:    #4A5F6E;   /* Secondary / caption text                   */
+  --color-text-light:    #768C9C;   /* Placeholder / disabled text                */
+
+  /* ── Legacy aliases (keeps old templates working) ── */
+  --color-secondary:       var(--color-primary);
+  --color-secondary-dark:  var(--color-primary-dark);
+  --color-primary-blue:    var(--color-navy);
+
+  /* ── Typography ── */
+  --font-ja: 'Noto Sans JP', sans-serif;
+  --font-en: 'Oswald', sans-serif;
+
+  /* ── Layout ── */
+  --container-width: 1500px;
+  --header-height:   72px;
+
+  /* ── Shadows ── */
+  --shadow-sm:   0 1px 4px rgba(33,58,78,0.08);
+  --shadow-md:   0 4px 16px rgba(33,58,78,0.10);
+  --shadow-lg:   0 12px 36px rgba(33,58,78,0.14);
+  --shadow-rose: 0 6px 20px rgba(195,33,40,0.25);
+
+  /* ── Motion ── */
+  --transition-smooth: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast:   all 0.15s ease;
+}
