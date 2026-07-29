@@ -241,6 +241,40 @@ $t = ( $current_lang === 'en' );
           ['venue_date'=>'1031','time'=>'10:00','team_a_ja'=>'日本','team_a_en'=>'JAPAN','team_b_ja'=>'ニュージーランド','team_b_en'=>'NEW ZEALAND','score_a'=>'','score_b'=>'','round'=>'group'],
         ];
       }
+
+      /* ── 試合データのソート ──
+       * 1. スコア未入力（未終了試合）が上部
+       * 2. 入力済みは最新の日付順（降順: 11/3 → 11/1 → 10/31）
+       * 3. 同じ日付の場合は後から入力された（インデックスが後ろの）ものが上
+       */
+      $indexed_matches = array();
+      foreach ( $db_matches as $idx => $m ) {
+        $m['_original_index'] = $idx;
+        $indexed_matches[]    = $m;
+      }
+
+      usort( $indexed_matches, function( $a, $b ) {
+        $a_finished = ( isset( $a['score_a'] ) && $a['score_a'] !== '' && isset( $a['score_b'] ) && $a['score_b'] !== '' ) ? 1 : 0;
+        $b_finished = ( isset( $b['score_a'] ) && $b['score_a'] !== '' && isset( $b['score_b'] ) && $b['score_b'] !== '' ) ? 1 : 0;
+
+        // 1. スコア未入力 (0) が上
+        if ( $a_finished !== $b_finished ) {
+          return $a_finished <=> $b_finished;
+        }
+
+        // 2. 日付の降順（最新日付が上）
+        $a_date = isset( $a['venue_date'] ) ? (int)$a['venue_date'] : ( isset( $a['date'] ) ? (int)preg_replace('/\D/', '', $a['date']) : 0 );
+        $b_date = isset( $b['venue_date'] ) ? (int)$b['venue_date'] : ( isset( $b['date'] ) ? (int)preg_replace('/\D/', '', $b['date']) : 0 );
+
+        if ( $a_date !== $b_date ) {
+          return $b_date <=> $a_date;
+        }
+
+        // 3. 同じ日付の場合：後から入力されたもの（元のインデックスが後）が上
+        return $b['_original_index'] <=> $a['_original_index'];
+      });
+
+      $db_matches = $indexed_matches;
       ?>
 
       <div class="info-matches-grid">
