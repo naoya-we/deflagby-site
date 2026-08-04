@@ -1,0 +1,14 @@
+# セキュリティ上、絶対に上げてはいけないファイル
+wp-config.php
+.htaccess
+
+# WordPress本体のコアファイルを除外
+/wp-admin/
+/wp-includes/
+/xmlrpc.php
+/*.php
+!/wp-config-sample.php
+
+# 画像などの容量が大きいフォルダを除外
+/wp-content/uploads/
+/wp-content/upgrade/

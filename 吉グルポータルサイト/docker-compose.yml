@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: gurumex_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: gurumex_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+    volumes:
+      - gurumex_db_data:/var/lib/mysql
+    networks:
+      - gurumex_net
+
+  wordpress:
+    image: wordpress:latest
+    container_name: gurumex_wordpress
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: gurumex_db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+      WORDPRESS_TABLE_PREFIX: gx_
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      - gurumex_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: gurumex_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: wp_user
+      PMA_PASSWORD: wp_pass
+    networks:
+      - gurumex_net
+
+networks:
+  gurumex_net:
+    driver: bridge
+
+volumes:
+  gurumex_db_data:

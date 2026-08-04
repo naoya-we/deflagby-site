@@ -1,0 +1,17 @@
+# WordPress core files (managed by Docker volume)
+html/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Docker volumes (managed by Docker)
+# db_data is a named volume, not a bind mount
